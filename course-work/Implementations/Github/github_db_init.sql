@@ -1,3 +1,8 @@
+-- this  in prod :D --
+USE master;
+ALTER DATABASE GithubDummy SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+DROP DATABASE GithubDummy;
+
 DROP DATABASE IF EXISTS GithubDummy;
 GO
 
@@ -275,8 +280,8 @@ CREATE PROCEDURE GetRepositoryContributors
 AS
 BEGIN
     SELECT u.id AS UserId, u.name AS UserName, u.email
-    FROM Contributors c
-    JOIN Users u ON u.id = c.userId
+    FROM Contributor c
+    JOIN [User] u ON u.id = c.userId
     WHERE c.repositoryId = @RepositoryId;
 END;
 GO
@@ -348,3 +353,8 @@ BEGIN
     );
 END;
 GO
+
+SELECT dbo.GetCommitCount(2) AS "Commit Count";
+SELECT dbo.GetOpenIssueCount(2) AS "Issue Count";
+
+EXEC dbo.GetRepositoryContributors @RepositoryId = 2;
