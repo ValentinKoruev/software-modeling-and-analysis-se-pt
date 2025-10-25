@@ -358,3 +358,11 @@ SELECT dbo.GetCommitCount(2) AS "Commit Count";
 SELECT dbo.GetOpenIssueCount(2) AS "Issue Count";
 
 EXEC dbo.GetRepositoryContributors @RepositoryId = 2;
+
+INSERT INTO Repository (ownerId, name)
+VALUES (2, 'TestRepo');
+
+SELECT * FROM Contributor;
+
+DELETE FROM Contributor
+WHERE userId = 2 AND repositoryId = 17;
